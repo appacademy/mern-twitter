@@ -9,7 +9,7 @@ class SignupForm extends React.Component {
       handle: '',
       password: '',
       password2: '',
-      errors: []
+      errors: {}
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearedErrors = false;
@@ -19,14 +19,8 @@ class SignupForm extends React.Component {
     if (nextProps.signedIn === true) {
       this.props.history.push('/login');
     }
-  }
 
-  componentWillUpdate(nextProps, nextState) {
-    if (this.clearedErrors) {
-      nextState.errors = [];
-    }
-
-    this.clearedErrors = !this.clearedErrors;
+    this.setState({errors: nextProps.errors})
   }
 
   update(field) {
@@ -47,23 +41,22 @@ class SignupForm extends React.Component {
     this.props.signup(user, this.props.history); 
   }
 
-  // renderErrors() {
-  //   return(
-  //     <ul>
-  //       {this.state.errors.map((error, i) => (
-  //         <li key={`error-${i}`} className="error-text">
-  //           {error}
-  //         </li>
-  //       ))}
-  //     </ul>
-  //   );
-  // }
+  renderErrors() {
+    return(
+      <ul>
+        {Object.keys(this.state.errors).map((error, i) => (
+          <li key={`error-${i}`}>
+            {this.state.errors[error]}
+          </li>
+        ))}
+      </ul>
+    );
+  }
 
   render() {
     return (
       <div className="login-form-container">
-        <form onSubmit={this.handleSubmit} className="login-form-box">
-          <br/>
+        <form onSubmit={this.handleSubmit}>
           <div className="login-form">
             <br/>
               <input type="text"
@@ -95,7 +88,7 @@ class SignupForm extends React.Component {
               />
             <br/>
             <input type="submit" value="Submit" />
-            {/* {this.renderErrors()} */}
+            {this.renderErrors()}
           </div>
         </form>
       </div>

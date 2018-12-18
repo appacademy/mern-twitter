@@ -7,9 +7,10 @@ class LoginForm extends React.Component {
     this.state = {
       email: '',
       password: '',
-      errors: []
+      errors: {}
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
     this.clearedErrors = false;
   }
 
@@ -17,14 +18,8 @@ class LoginForm extends React.Component {
     if (nextProps.currentUser === true) {
       this.props.history.push('/tweets');
     }
-  }
 
-  componentWillUpdate(nextProps, nextState) {
-    if (this.clearedErrors) {
-      nextState.errors = [];
-    }
-
-    this.clearedErrors = !this.clearedErrors;
+    this.setState({errors: nextProps.errors})
   }
 
   update(field) {
@@ -43,17 +38,17 @@ class LoginForm extends React.Component {
     this.props.login(user); 
   }
 
-  // renderErrors() {
-  //   return(
-  //     <ul>
-  //       {this.state.errors.map((error, i) => (
-  //         <li key={`error-${i}`} className="error-text">
-  //           {error}
-  //         </li>
-  //       ))}
-  //     </ul>
-  //   );
-  // }
+  renderErrors() {
+    return(
+      <ul>
+        {Object.keys(this.state.errors).map((error, i) => (
+          <li key={`error-${i}`}>
+            {this.state.errors[error]}
+          </li>
+        ))}
+      </ul>
+    );
+  }
 
   render() {
     return (
@@ -77,7 +72,7 @@ class LoginForm extends React.Component {
               />
             <br/>
             <input type="submit" value="Submit" />
-            {/* {this.renderErrors()} */}
+            {this.renderErrors()}
           </div>
         </form>
       </div>

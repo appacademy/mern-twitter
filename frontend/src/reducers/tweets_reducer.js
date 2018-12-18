@@ -1,6 +1,6 @@
-import { RECEIVE_TWEETS, RECEIVE_USER_TWEETS } from '../actions/tweet_actions';
+import { RECEIVE_TWEETS, RECEIVE_USER_TWEETS, RECEIVE_NEW_TWEET } from '../actions/tweet_actions';
   
-  const TweetsReducer = (state = { all: {}, user: {} }, action) => {
+  const TweetsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
     Object.freeze(state);
     let newState = Object.assign({}, state);
     switch(action.type) {
@@ -9,6 +9,9 @@ import { RECEIVE_TWEETS, RECEIVE_USER_TWEETS } from '../actions/tweet_actions';
         return newState;
       case RECEIVE_USER_TWEETS:
         newState.user = action.tweets.data;
+        return newState;
+      case RECEIVE_NEW_TWEET:
+        newState.new = action.tweet.data
         return newState;
       default:
         return state;
