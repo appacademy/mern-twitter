@@ -11,6 +11,7 @@ class SignupForm extends React.Component {
       password2: '',
       errors: {}
     };
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearedErrors = false;
   }
@@ -62,28 +63,24 @@ class SignupForm extends React.Component {
               <input type="text"
                 value={this.state.email}
                 onChange={this.update('email')}
-                className="login-input"
                 placeholder="Email"
               />
             <br/>
               <input type="text"
                 value={this.state.handle}
                 onChange={this.update('handle')}
-                className="login-input"
                 placeholder="Handle"
               />
             <br/>
               <input type="password"
                 value={this.state.password}
                 onChange={this.update('password')}
-                className="login-input"
                 placeholder="Password"
               />
             <br/>
               <input type="password"
                 value={this.state.password2}
                 onChange={this.update('password2')}
-                className="login-input"
                 placeholder="Confirm Password"
               />
             <br/>

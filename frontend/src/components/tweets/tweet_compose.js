@@ -36,7 +36,7 @@ class TweetCompose extends React.Component {
   render() {
     return (
         <div>
-            <form onSubmit={this.handleSubmit} className="login-form-box">
+            <form onSubmit={this.handleSubmit}>
                 <div>
                     <input type="textarea"
                         value={this.state.text}

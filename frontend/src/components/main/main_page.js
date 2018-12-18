@@ -7,17 +7,10 @@ class MainPage extends React.Component {
   render() {
     return (
       <div>
-        <nav>
-          <h1>Chirper</h1>
-        </nav>
-        <div id="main">
-          <div id="session-form-container">
-            <p className="signup-text">Sign Up for Free</p>
-            <LoginFormContainer />
-          </div>
-        </div>
+        <p>A Twitter Clone</p>
+        <LoginFormContainer />
         <footer>
-          Copyright &copy; 2019 Chirper (just kidding)
+          Copyright &copy; 2019 Chirper
         </footer>
       </div>
     );

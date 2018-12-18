@@ -9,6 +9,7 @@ class LoginForm extends React.Component {
       password: '',
       errors: {}
     };
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
     this.clearedErrors = false;
@@ -30,6 +31,7 @@ class LoginForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
     let user = {
       email: this.state.email,
       password: this.state.password
@@ -52,22 +54,20 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div className="login-form-container">
+      <div>
         <form onSubmit={this.handleSubmit} className="login-form-box">
           <br/>
-          <div className="login-form">
+          <div>
             <br/>
               <input type="text"
                 value={this.state.email}
                 onChange={this.update('email')}
-                className="login-input"
                 placeholder="Email"
               />
             <br/>
               <input type="password"
                 value={this.state.password}
                 onChange={this.update('password')}
-                className="login-input"
                 placeholder="Password"
               />
             <br/>
