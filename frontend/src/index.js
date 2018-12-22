@@ -13,19 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
 
-    const decoded = jwt_decode(localStorage.jwtToken);
-    const preloadedState = { session: { isAuthenticated: true, user: decoded } };
+    const decodedUser = jwt_decode(localStorage.jwtToken);
+    const preloadedState = { session: { isAuthenticated: true, user: decodedUser } };
     
     store = configureStore(preloadedState);
 
     const currentTime = Date.now() / 1000;
 
-    if (decoded.exp < currentTime) {
+    if (decodedUser.exp < currentTime) {
       store.dispatch(logout());
       window.location.href = '/login';
     }
   } else {
-    store = configureStore();
+    store = configureStore({});
   }
   const root = document.getElementById('root');
 

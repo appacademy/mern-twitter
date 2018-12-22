@@ -87,7 +87,7 @@ router.post('/register', (req, res) => {
                     success: true,
                     token: 'Bearer ' + token
                 });
-                });
+              });
             } else {
                 return res.status(400).json({password: 'Incorrect password'});
             }

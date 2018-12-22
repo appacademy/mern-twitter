@@ -24,7 +24,7 @@ class Tweet extends React.Component {
       return (<div>There are no Tweets</div>)
     } else {
       return (
-        <div className="login-form-container">
+        <div>
           <h2>All Tweets</h2>
           {this.state.tweets.map(tweet => (
             <TweetBox key={tweet._id} text={tweet.text} />

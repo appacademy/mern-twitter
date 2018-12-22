@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       email: '',
       password: '',
@@ -12,7 +13,6 @@ class LoginForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
-    this.clearedErrors = false;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -55,8 +55,7 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} className="login-form-box">
-          <br/>
+        <form onSubmit={this.handleSubmit}>
           <div>
             <br/>
               <input type="text"

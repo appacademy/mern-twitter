@@ -12,7 +12,7 @@ export default function(state = initialState, action) {
     case RECEIVE_CURRENT_USER:
       return {
         ...state,
-        isAuthenticated: !!action.currentUser.id,
+        isAuthenticated: !!action.currentUser,
         user: action.currentUser
       };
     case RECEIVE_USER_LOGOUT:
