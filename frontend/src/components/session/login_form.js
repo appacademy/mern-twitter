@@ -7,8 +7,7 @@ class LoginForm extends React.Component {
 
     this.state = {
       email: '',
-      password: '',
-      errors: {}
+      password: ''
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,8 +18,6 @@ class LoginForm extends React.Component {
     if (nextProps.currentUser === true) {
       this.props.history.push('/tweets');
     }
-
-    this.setState({errors: nextProps.errors})
   }
 
   update(field) {
@@ -43,9 +40,9 @@ class LoginForm extends React.Component {
   renderErrors() {
     return(
       <ul>
-        {Object.keys(this.state.errors).map((error, i) => (
+        {Object.keys(this.props.errors).map((error, i) => (
           <li key={`error-${i}`}>
-            {this.state.errors[error]}
+            {this.props.errors[error]}
           </li>
         ))}
       </ul>
