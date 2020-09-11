@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../../actions/session_actions";
 
 const LoginForm = (props) => {
   const [form, setForm] = useState({ email: "", password: "" });
-
-  const { currentUser, history, login, errors } = props;
+  const errors = useSelector((state) => state.errors.session);
+  const dispatch = useDispatch();
 
   const updateField = (field) => {
-    return e => setForm({
-      ...form,
-      [field]: e.target.value,
-    });
+    return (e) =>
+      setForm({
+        ...form,
+        [field]: e.target.value,
+      });
   };
 
   const handleSubmit = (e) => {
@@ -21,14 +24,8 @@ const LoginForm = (props) => {
       password: form.password,
     };
 
-    login(user);
+    dispatch(login(user));
   };
-
-  useEffect(() => {
-    if (currentUser) {
-      history.push("/tweets");
-    }
-  }, [currentUser]);
 
   const renderErrors = () => {
     return (
@@ -48,14 +45,14 @@ const LoginForm = (props) => {
           <input
             type="text"
             value={form.email}
-            onChange={updateField('email')}
+            onChange={updateField("email")}
             placeholder="Email"
           />
           <br />
           <input
             type="password"
             value={form.password}
-            onChange={updateField('password')}
+            onChange={updateField("password")}
             placeholder="Password"
           />
           <br />
