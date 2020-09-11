@@ -1,11 +1,19 @@
 import React from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
+import { logout } from '../../actions/session_actions';
 import "./navbar.css";
 
-const NavBar = ({ loggedIn, logout }) => {
+const NavBar = () => {
+  const loggedIn = useSelector( state => {
+    return state.session.isAuthenticated
+  })
+
+  const dispatch = useDispatch()
+  
   const logoutUser = (e) => {
     e.preventDefault();
-    logout();
+    dispatch(logout());
   };
 
   const getLinks = () => {
