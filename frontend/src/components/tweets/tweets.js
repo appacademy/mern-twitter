@@ -4,7 +4,7 @@ import TweetBox from "./tweet_box";
 import { fetchTweets } from "../../actions/tweet_actions";
 import { useDispatch, useSelector } from "react-redux";
 
-const Tweets = (props) => {
+const Tweets = () => {
   const tweets = useSelector((state) => Object.values(state.tweets.all));
   const dispatch = useDispatch();
 
