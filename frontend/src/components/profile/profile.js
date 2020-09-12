@@ -11,7 +11,7 @@ const Profile = () => {
   useEffect(() => {
     console.log(currentUser.id);
     dispatch(fetchUserTweets(currentUser.id));
-  }, []);
+  }, [currentUser, dispatch]);
 
   if (tweets.length === 0) {
     return <div>This user has no Tweets</div>;

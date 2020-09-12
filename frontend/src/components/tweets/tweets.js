@@ -9,8 +9,8 @@ const Tweets = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchTweets());
-  }, []);
+    dispatch(fetchTweets())
+  }, [dispatch]);
 
   if (tweets.length === 0) {
     return <div>There are no Tweets</div>;

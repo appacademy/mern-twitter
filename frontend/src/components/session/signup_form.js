@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import { signUp } from '../../actions/session_actions';
+import { useSelector, useDispatch } from "react-redux";
+import { signUp } from "../../actions/session_actions";
 
 const SignupForm = (props) => {
-  const signedIn = useSelector(state => state.session.isSignedIn)
-  const errors = useSelector(state => state.errors.session)
-  const dispatch = useDispatch()
+  const signedIn = useSelector((state) => state.session.isSignedIn);
+  const errors = useSelector((state) => state.errors.session);
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "",
     handle: "",
     password: "",
     password2: "",
   });
+  const { history } = props;
 
-  const { history} = props;
-
-  useEffect(()=>{
-    if(signedIn){
-      history.push('/login')
+  useEffect(() => {
+    if (signedIn) {
+      history.push("/login");
     }
-  },[signedIn])
+  }, [signedIn, history]);
 
   const update = (field) => {
     return (e) =>
