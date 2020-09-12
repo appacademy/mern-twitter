@@ -1,5 +1,5 @@
 import React from "react";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Route, Redirect, withRouter } from "react-router-dom";
 
 const Auth = ({ component: Component, path, exact }) => {
