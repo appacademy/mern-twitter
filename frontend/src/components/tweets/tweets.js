@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import TweetBox from "./tweet_box";
+import { fetchTweets } from "../../actions/tweet_actions";
+import { useDispatch, useSelector } from "react-redux";
 
-const Tweets = ({ tweets, fetchTweets }) => {
+const Tweets = (props) => {
+  const tweets = useSelector((state) => Object.values(state.tweets.all));
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchTweets();
+    dispatch(fetchTweets());
   }, []);
 
   if (tweets.length === 0) {
