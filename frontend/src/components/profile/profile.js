@@ -1,38 +1,30 @@
-import React from 'react';
-import TweetBox from '../tweets/tweet_box';
+import React, { useEffect } from "react";
+import TweetBox from "../tweets/tweet_box";
+import { fetchUserTweets } from "../../actions/tweet_actions";
+import { useDispatch, useSelector } from "react-redux";
 
-class Profile extends React.Component {
-    constructor(props) {
-        super(props);
+const Profile = () => {
+  const tweets = useSelector((state) => Object.values(state.tweets.user));
+  const currentUser = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
 
-        this.state = {
-            tweets: []
-        }
-    }
-    
-    componentWillMount() {
-        console.log(this.props.currentUser.id)
-        this.props.fetchUserTweets(this.props.currentUser.id);
-    }
+  useEffect(() => {
+    console.log(currentUser.id);
+    dispatch(fetchUserTweets(currentUser.id));
+  }, [currentUser, dispatch]);
 
-    componentWillReceiveProps(newState) {
-        this.setState({ tweets: newState.tweets });
-    }   
-    
-    render() {
-        if (this.state.tweets.length === 0) {
-          return (<div>This user has no Tweets</div>)
-        } else {
-          return (
-            <div>
-              <h2>All of This User's Tweets</h2>
-              {this.state.tweets.map(tweet => (
-                <TweetBox key={tweet._id} text={tweet.text} />
-              ))}
-            </div>
-          );
-        }
-      }
-}
+  if (tweets.length === 0) {
+    return <div>This user has no Tweets</div>;
+  } else {
+    return (
+      <div>
+        <h2>All of This User's Tweets</h2>
+        {tweets.map((tweet) => (
+          <TweetBox key={tweet._id} text={tweet.text} />
+        ))}
+      </div>
+    );
+  }
+};
 
 export default Profile;

@@ -1,56 +1,43 @@
-import React from 'react';
-import TweetBox from './tweet_box';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import TweetBox from "./tweet_box";
+import { composeTweet } from "../../actions/tweet_actions";
 
-class TweetCompose extends React.Component {
-  constructor(props) {
-      super(props);
+const TweetCompose = (props) => {
+  const dispatch = useDispatch();
+  const [text, setText] = useState("");
 
-      this.state = {
-          text: "",
-          newTweet: ""
-      }
-
-      this.handleSubmit = this.handleSubmit.bind(this);
-  } 
-
-  componentWillReceiveProps(nextProps) {
-      this.setState({newTweet: nextProps.newTweet.text});
-  }
-
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     let tweet = {
-      text: this.state.text
+      text: text,
     };
 
-    this.props.composeTweet(tweet); 
-    this.setState({text: ''})
-  }
+    dispatch(composeTweet(tweet));
+    setText("");
+  };
 
-  update() {
-    return e => this.setState({
-      text: e.currentTarget.value
-    });
-  }
+  const update = (e) => {
+    setText(e.currentTarget.value);
+  };
 
-  render() {
-    return (
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
         <div>
-            <form onSubmit={this.handleSubmit}>
-                <div>
-                    <input type="textarea"
-                        value={this.state.text}
-                        onChange={this.update()}
-                        placeholder="Write your tweet..."
-                    />
-                    <input type="submit" value="Submit" />
-                </div>
-            </form>
-            <br />
-            <TweetBox text={this.state.newTweet} />
+          <input
+            type="textarea"
+            value={text}
+            onChange={update}
+            placeholder="Write your tweet..."
+          />
+          <input type="submit" value="Submit" />
         </div>
-    )
-  }
-}
+      </form>
+      <br />
+      <TweetBox text={text} />
+    </div>
+  );
+};
 
 export default TweetCompose;
