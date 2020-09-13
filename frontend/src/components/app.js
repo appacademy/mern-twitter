@@ -7,7 +7,7 @@ import MainPage from './main/main_page';
 import LoginForm from './session/login_form';
 import SignupForm from './session/signup_form';
 import Profile from './profile/profile';
-import TweetComposeContainer from './tweets/tweet_compose_container';
+import TweetCompose from './tweets/tweet_compose';
 
 const App = () => (
   <div>
@@ -19,7 +19,7 @@ const App = () => (
 
       <ProtectedRoute exact path="/tweets" component={Tweets} />
       <ProtectedRoute exact path="/profile" component={Profile} />
-      <ProtectedRoute exact path="/new_tweet" component={TweetComposeContainer} />
+      <ProtectedRoute exact path="/new_tweet" component={TweetCompose} />
     </Switch>
   </div>
 );

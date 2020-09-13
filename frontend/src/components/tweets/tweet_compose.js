@@ -1,23 +1,26 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import TweetBox from "./tweet_box";
+import { composeTweet } from "../../actions/tweet_actions";
 
 const TweetCompose = (props) => {
-  const [text, setText] = useState('');
-  const { composeTweet } = props;
+  const currentUser = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
+  const [text, setText] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     let tweet = {
-      text: text
+      text: text,
     };
 
-    composeTweet(tweet);
+    dispatch(composeTweet(tweet));
     setText("");
   };
 
   const update = (e) => {
-    setText(e.currentTarget.value)
-  }
+    setText(e.currentTarget.value);
+  };
 
   return (
     <div>
