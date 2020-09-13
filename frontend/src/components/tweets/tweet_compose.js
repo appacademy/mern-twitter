@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import TweetBox from "./tweet_box";
 import { composeTweet } from "../../actions/tweet_actions";
 
 const TweetCompose = (props) => {
-  const currentUser = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const [text, setText] = useState("");
 
